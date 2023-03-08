@@ -1,0 +1,74 @@
+Use these commands to create and load Data into Postgres for this project.
+
+root
+ |-- order_customer_id: long (nullable = true)
+ |-- order_date: string (nullable = true)
+ |-- order_id: long (nullable = true)
+ |-- order_status: string (nullable = true)
+
+root
+ |-- order_item_id: long (nullable = true)
+ |-- order_item_order_id: long (nullable = true)
+ |-- order_item_product_id: long (nullable = true)
+ |-- order_item_product_price: double (nullable = true)
+ |-- order_item_quantity: long (nullable = true)
+ |-- order_item_subtotal: double (nullable = true)
+
+create table order_items (order_item_id float,order_item_order_id float,order_item_product_id float,order_item_product_price float,order_item_quantity float,order_item_subtotal float,dt date NOT NULL DEFAULT NOW());
+
+\copy order_items(order_item_id,order_item_order_id,order_item_product_id,order_item_product_price,order_item_quantity,order_item_subtotal) FROM '/home/hammerjack/kdb_Files/retail_db_json-main/order_items/csv/part-00000-394aadf4-5482-44c9-a480-c99e6ea9e968.csv' DELIMITER ',' CSV HEADER;
+
+
+create table orders (order_customer_id float,order_date date,order_id float,order_status varchar(255),dt date NOT NULL DEFAULT NOW());
+
+\copy orders(order_customer_id,order_date,order_id,order_status) FROM '/home/hammerjack/kdb_Files/retail_db_json-main/orders/csv/part-00000-acbc52a0-f92c-4cf0-80bf-9515cf7c8ebf.csv' DELIMITER ',' CSV HEADER;
+
+
+
+
+
+root
+ |-- product_category_id: long (nullable = true)
+ |-- product_description: string (nullable = true)
+ |-- product_id: long (nullable = true)
+ |-- product_image: string (nullable = true)
+ |-- product_name: string (nullable = true)
+ |-- product_price: double (nullable = true)
+
+
+create table products (product_category_id float,product_description text,product_id float, product_image text,product_name varcher(255), product_price float);
+
+\copy products FROM '/home/hammerjack/kdb_Files/retail_db_json-main/products/csv/part-00000-450b775f-8e3d-47e3-a0b2-530ac823aba9.csv' DELIMITER ',' CSV HEADER;
+
+
+root
+ |-- department_id: long (nullable = true)
+ |-- department_name: string (nullable = true)
+
+create table departments (department_id float,department_name varcher(255));
+
+\copy departments FROM '/home/hammerjack/kdb_Files/retail_db_json-main/departments/csv/part-00000-75200bbe-0925-40e9-9b4c-e9cb992d0e76.csv' DELIMITER ',' CSV HEADER;
+
+root
+ |-- customer_city: string (nullable = true)
+ |-- customer_email: string (nullable = true)
+ |-- customer_fname: string (nullable = true)
+ |-- customer_id: long (nullable = true)
+ |-- customer_lname: string (nullable = true)
+ |-- customer_password: string (nullable = true)
+ |-- customer_state: string (nullable = true)
+ |-- customer_street: string (nullable = true)
+ |-- customer_zipcode: string (nullable = true)
+
+create table customers (customer_city varchar(255), customer_email varchar(255), customer_fname varchar(255),customer_id float, customer_lname varchar(255), customer_password varchar(255), customer_state varchar(255), customer_street varchar(255), customer_zipcode varchar(255));
+
+\copy customers FROM '/home/hammerjack/kdb_Files/retail_db_json-main/customers/csv/part-00000-8041e270-882c-40ae-9ac9-724b9a2f3977.csv' DELIMITER ',' CSV HEADER;
+
+root
+ |-- category_department_id: long (nullable = true)
+ |-- category_id: long (nullable = true)
+ |-- category_name: string (nullable = true)
+
+create table categories (category_department_id float, category_id float, category_name float);
+
+\copy categories FROM '/home/hammerjack/kdb_Files/retail_db_json-main/categories/csv/part-00000-92abf12c-0492-4bb7-be32-965c76cf2b69.csv' DELIMITER ',' CSV HEADER;
