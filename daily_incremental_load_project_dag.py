@@ -17,7 +17,7 @@ from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 
 
 #Name of bucket where we will be loading our file daily
-BUCKET_NAME = "s3a://kdb-etl-test/"
+BUCKET_NAME = "s3a://lambda-project/"
 
 # Name of file according to day so that we can upload it to S3
 todays_file_name = '{{ ds }}' + ".csv"
@@ -38,7 +38,7 @@ default_args = {
 }
 dag = DAG(
     default_args = default_args,
-    start_date=datetime(2023,3,6),
+    start_date=datetime(2023,xx,xx),
     schedule_interval ='@daily',
     dag_id = "incremental_load",
     description = 'Incremental-load-lambda-project'
@@ -133,7 +133,7 @@ def upload_file(file_name, bucket, object_name=None):
         object_name = os.path.basename(file_name)
 
     # Upload the file
-    s3_client = boto3.client('s3',region_name = 'ap-south-1',aws_access_key_id='AKIA3FN7P6DKMJMRK4GP', aws_secret_access_key='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')
+    s3_client = boto3.client('s3',region_name = 'ap-south-1',aws_access_key_id='xxxxxxxxxxxxxxxx', aws_secret_access_key='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
     try:
         response = s3_client.upload_file(file_name, bucket, object_name)
     except ClientError as e:
