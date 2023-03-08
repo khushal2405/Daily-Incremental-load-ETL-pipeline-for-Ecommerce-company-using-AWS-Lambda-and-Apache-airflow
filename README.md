@@ -31,3 +31,6 @@ Here, we are extracting Daily data from OLTP database(postgreSQL) using date and
 ## future scope
 - rather than using EMR clusters, I can write a Glue job that gets triggered by lambda and then load it into Redshift data warehouse using copy command. 
 - By using Glue I will be paying for only the resources that the glue scripts uses rather than provisioning lot of EMR clusters nodes saving the cost for unused ec2 instance resources.(Will try this in the next commit!!) 
+
+## ideas for improvement
+- we can introduce Data vaildation and Data quality check jobs after processing and loading of data.
